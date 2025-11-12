@@ -1,7 +1,20 @@
 <section class="register-wrapper">
-  <header>
-    <h1>Registrar postulante</h1>
-    <p>Completa la informacion para crear un nuevo postulante dentro del sistema.</p>
+  <header class="form-header">
+    <div>
+      <p class="eyebrow">Nuevo registro</p>
+      <h1>Registrar postulante</h1>
+      <p>Completa la información para crear un nuevo postulante dentro del sistema.</p>
+    </div>
+    <button
+      *ngIf="isDialogInstance"
+      type="button"
+      mat-icon-button
+      aria-label="Cerrar"
+      class="close-btn"
+      (click)="closeDialog()"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
   </header>
 
   <form [formGroup]="postulantForm" (ngSubmit)="submit()" novalidate class="postulant-form">

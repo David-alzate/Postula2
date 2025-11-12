@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Optional } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialogRef } from '@angular/material/dialog';
 import { IdentificationType } from '../../models/identification-type.model';
 import { IdentificationTypesService } from '../../services/identification-types.service';
 import { PostulantService } from '../../services/postulant.service';
@@ -15,13 +16,16 @@ export class RegisterPostulantComponent implements OnInit {
   identificationTypes: IdentificationType[] = [];
   isSubmitting = false;
   isLoadingTypes = false;
+  isDialogInstance = false;
 
   constructor(
     private fb: FormBuilder,
     private postulantService: PostulantService,
     private identificationTypesService: IdentificationTypesService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    @Optional() private dialogRef?: MatDialogRef<RegisterPostulantComponent>
   ) {
+    this.isDialogInstance = !!this.dialogRef;
     this.postulantForm = this.fb.group({
       documentTypeId: ['', Validators.required],
       document: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
@@ -87,6 +91,7 @@ export class RegisterPostulantComponent implements OnInit {
           this.postulantForm.reset();
           this.postulantForm.markAsPristine();
           this.postulantForm.markAsUntouched();
+          this.closeDialog(true);
         },
         error: error => {
           this.isSubmitting = false;
@@ -96,5 +101,11 @@ export class RegisterPostulantComponent implements OnInit {
           });
         },
       });
+  }
+
+  closeDialog(shouldReload = false): void {
+    if (this.dialogRef) {
+      this.dialogRef.close(shouldReload);
+    }
   }
 }

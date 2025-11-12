@@ -10,6 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './modules/Login/components/login/login.component';
 import { NavBarComponent } from './shared/componets/nav-bar/nav-bar/nav-bar.component';
 import { RegisterPostulantComponent } from './modules/Postulant/components/register-postulant/register-postulant.component';
+import { PostulantDashboardComponent } from './modules/Postulant/components/postulant-dashboard/postulant-dashboard.component';
 import { AuthTokenInterceptor } from './core/interceptors/auth-token.interceptor';
 
 @NgModule({
@@ -17,7 +18,8 @@ import { AuthTokenInterceptor } from './core/interceptors/auth-token.interceptor
     AppComponent,
     LoginComponent,
     NavBarComponent,
-    RegisterPostulantComponent
+    RegisterPostulantComponent,
+    PostulantDashboardComponent
   ],
   imports: [
     BrowserModule,

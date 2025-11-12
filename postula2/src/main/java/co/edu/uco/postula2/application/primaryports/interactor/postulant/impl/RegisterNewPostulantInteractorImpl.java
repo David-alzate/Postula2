@@ -4,12 +4,13 @@ import co.edu.uco.postula2.application.primaryports.dto.postulant.RegisterNewPos
 import co.edu.uco.postula2.application.primaryports.interactor.postulant.RegisterNewPostulantInteractor;
 import co.edu.uco.postula2.application.primaryports.mapper.postulant.RegisterNewPostulantMapper;
 import co.edu.uco.postula2.application.usecase.postulant.RegisterNewPostulant;
+import co.edu.uco.postula2.croscutting.exceptions.NotificationPostumotException;
 import co.edu.uco.postula2.domain.postulant.PostulantDomain;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 @Service
-@Transactional
+@Transactional(noRollbackFor = NotificationPostumotException.class)
 public class RegisterNewPostulantInteractorImpl implements RegisterNewPostulantInteractor {
 
     private final RegisterNewPostulant registerNewPostulant;

@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.authService.isLoggedIn$.subscribe(isLoggedIn => {
         if (isLoggedIn) {
           this.loading = false;
-          this.router.navigate(['/postulantes/registrar']);
+          this.router.navigate(['/postulantes']);
         } else if (isLoggedIn === false) {
           this.loading = false;
         }
@@ -35,5 +35,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   signInWithGoogle(): void {
     this.loading = true;
     this.authService.login();
+  }
+
+  blockNav(event: Event): void {
+    event.preventDefault();
   }
 }

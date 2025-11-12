@@ -1,16 +1,37 @@
-<div class="body">
-  <div class="login">
-    <mat-spinner *ngIf="loading" class="spinner" diameter="50"></mat-spinner>
-
-    <div *ngIf="!loading" class="login-content">
-      <img class="img-form" src="assets/img/perfil-del-usuario.png" alt="Usuario" />
-      <h1>Bienvenido a Postumot</h1>
-      <p>Autenticate con tu cuenta institucional de Google para acceder al registro de postulantes.</p>
-
-      <button type="button" class="google-button" mat-flat-button color="primary" (click)="signInWithGoogle()" [disabled]="loading">
-        <img src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png" alt="Google" class="google-icon" />
-        Iniciar sesion con Google
-      </button>
-    </div>
+<section class="header" aria-label="PostuMOT landing">
+  <div class="menu">
+    <h1 class="logo">PostuMOT</h1>
+    <nav class="headNav" aria-label="Navegación principal">
+      <button type="button" class="nav-link" (click)="blockNav($event)">Home</button>
+      <button type="button" class="nav-link" (click)="blockNav($event)">Contact</button>
+      <button type="button" class="nav-link" (click)="blockNav($event)">Support</button>
+    </nav>
+    <button type="button" class="btn-vacantes" (click)="signInWithGoogle()" [disabled]="loading">
+      Login
+    </button>
   </div>
+
+  <div class="infomenu">
+    <div class="generalInf">
+      <p class="eyebrow">Plataforma oficial</p>
+      <h2>Sistema de postulación para docentes</h2>
+      <p class="lead">
+        Visualiza las vacantes disponibles y completa tu registro usando tu cuenta institucional de Google.
+      </p>
+      <button type="button" class="btn-login" (click)="signInWithGoogle()" [disabled]="loading">
+        <img
+          src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png"
+          alt="Google"
+          class="google-icon"
+        />
+        Login con Google
+      </button>
+      <p class="helper">Al continuar aceptas iniciar sesión y ser redirigido al formulario oficial.</p>
+    </div>
+    <img src="assets/img/uni.png" alt="Universidad" class="hero-image" />
+  </div>
+</section>
+
+<div class="loading-overlay" *ngIf="loading">
+  <mat-spinner diameter="64"></mat-spinner>
 </div>
