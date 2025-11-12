@@ -1,0 +1,16 @@
+<div class="body">
+  <div class="login">
+    <mat-spinner *ngIf="loading" class="spinner" diameter="50"></mat-spinner>
+
+    <div *ngIf="!loading" class="login-content">
+      <img class="img-form" src="assets/img/perfil-del-usuario.png" alt="Usuario" />
+      <h1>Bienvenido a Postumot</h1>
+      <p>Autenticate con tu cuenta institucional de Google para acceder al registro de postulantes.</p>
+
+      <button type="button" class="google-button" mat-flat-button color="primary" (click)="signInWithGoogle()" [disabled]="loading">
+        <img src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png" alt="Google" class="google-icon" />
+        Iniciar sesion con Google
+      </button>
+    </div>
+  </div>
+</div>

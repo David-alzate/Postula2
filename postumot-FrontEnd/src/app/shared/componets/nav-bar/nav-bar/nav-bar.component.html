@@ -1,0 +1,25 @@
+<mat-toolbar color="primary" *ngIf="showNavbar">
+  <span>Bienvenido {{ userProfile?.name || 'al sistema' }}</span>
+  <span class="example-spacer"></span>
+
+  <button mat-button [routerLink]="['/postulantes/registrar']" *ngIf="isLoggedIn">
+    <mat-icon>person_add</mat-icon>
+    Registrar postulante
+  </button>
+
+  <button (click)="logout()" mat-icon-button matTooltip="Cerrar sesion" *ngIf="isLoggedIn">
+    <mat-icon>logout</mat-icon>
+  </button>
+
+  <div class="profile-container" *ngIf="isLoggedIn">
+    <img
+      [src]="userProfile?.picture"
+      alt="profile"
+      class="profile-pic"
+      *ngIf="userProfile?.picture; else initials"
+    />
+    <ng-template #initials>
+      <div class="profile-placeholder">{{ userProfile?.name?.charAt(0) }}</div>
+    </ng-template>
+  </div>
+</mat-toolbar>

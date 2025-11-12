@@ -1,0 +1,94 @@
+<section class="register-wrapper">
+  <header>
+    <h1>Registrar postulante</h1>
+    <p>Completa la informacion para crear un nuevo postulante dentro del sistema.</p>
+  </header>
+
+  <form [formGroup]="postulantForm" (ngSubmit)="submit()" novalidate class="postulant-form">
+    <div class="form-grid">
+      <mat-form-field appearance="outline">
+        <mat-label>Tipo de identificacion</mat-label>
+        <mat-select formControlName="documentTypeId" [disabled]="isLoadingTypes">
+          <mat-option value="" disabled>Seleccione una opcion</mat-option>
+          <mat-option *ngFor="let type of identificationTypes" [value]="type.id">
+            {{ type.nombre }}
+          </mat-option>
+        </mat-select>
+        <mat-hint *ngIf="isLoadingTypes">Cargando tipos disponibles...</mat-hint>
+        <mat-error *ngIf="getControl('documentTypeId')?.hasError('required')">
+          Este campo es obligatorio
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Numero de documento</mat-label>
+        <input matInput formControlName="document" inputmode="numeric" autocomplete="off" />
+        <mat-error *ngIf="getControl('document')?.hasError('required')">
+          Este campo es obligatorio
+        </mat-error>
+        <mat-error *ngIf="getControl('document')?.hasError('pattern')">
+          Solo se permiten numeros
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Primer nombre</mat-label>
+        <input matInput formControlName="firstName" autocomplete="given-name" />
+        <mat-error *ngIf="getControl('firstName')?.hasError('required')">
+          Este campo es obligatorio
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Segundo nombre</mat-label>
+        <input matInput formControlName="secondName" autocomplete="additional-name" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Primer apellido</mat-label>
+        <input matInput formControlName="lastName" autocomplete="family-name" />
+        <mat-error *ngIf="getControl('lastName')?.hasError('required')">
+          Este campo es obligatorio
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Segundo apellido</mat-label>
+        <input matInput formControlName="lastSecondName" autocomplete="additional-name" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Telefono</mat-label>
+        <input matInput formControlName="phone" inputmode="tel" autocomplete="tel" />
+        <mat-error *ngIf="getControl('phone')?.hasError('required')">
+          Este campo es obligatorio
+        </mat-error>
+        <mat-error *ngIf="getControl('phone')?.hasError('pattern')">
+          Solo se permiten numeros
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Correo electronico</mat-label>
+        <input matInput formControlName="email" autocomplete="email" />
+        <mat-error *ngIf="getControl('email')?.hasError('required')">
+          Este campo es obligatorio
+        </mat-error>
+        <mat-error *ngIf="getControl('email')?.hasError('email')">
+          Ingresa un correo valido
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <button
+      mat-flat-button
+      color="primary"
+      class="submit-btn"
+      type="submit"
+      [disabled]="isSubmitting || isLoadingTypes"
+    >
+      <mat-spinner *ngIf="isSubmitting" diameter="20"></mat-spinner>
+      <span>{{ isSubmitting ? 'Guardando...' : 'Registrar postulante' }}</span>
+    </button>
+  </form>
+</section>
